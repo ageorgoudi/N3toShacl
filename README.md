@@ -1,6 +1,6 @@
 # N3toShacl
 
-An automated tool for transforming N3 rules to SHACL rules.
+# An automated tool for transforming N3 rules to SHACL rules.
 
 
 Semantic Web and Linked Data are now included among the state-of-the-art technologies and have
