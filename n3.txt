@@ -1,0 +1,17 @@
+@prefix gd: <http://example.org/gedcom/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix : <http://www.agfa.com/w3c/euler/gedcom-facts#>.
+@prefix dc: <http://purl.org/dc/elements/1.1/>.
+@prefix dcterms: <http://purl.org/dc/terms/>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix sh: <http://www.w3.org/ns/shacl#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+
+@forAll :child, :family, :parent. {:child gd:childIn :family. :parent gd:spouseIn :family} log:implies {:child gd:parent :parent}.
+@forAll :parent, :child. {:child gd:parent :parent} log:implies {:parent gd:child :child}.
+@forAll :child, :parent. {:child gd:parent :parent. :parent gd:sex "Male"} log:implies {:child gd:father :parent} .
+@forAll :child, :parent. {:child gd:parent :parent. :parent gd:sex "Female"} log:implies {:child gd:mother :parent}.
+@forAll :parent, :child. {:child gd:parent :parent. :child gd:sex "Male"} log:implies {:parent gd:son :child} .
+@forAll :parent, :child. {:child gd:parent :parent. :child gd:sex "Female"} log:implies {:parent gd:daughter :child}.

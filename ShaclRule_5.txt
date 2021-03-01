@@ -1,0 +1,89 @@
+#baseURI: http://convertN3ToShacl/1.5 
+@prefix gd: <http://example.org/gedcom/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix : <http://www.agfa.com/w3c/euler/gedcom-facts#>.
+@prefix dc: <http://purl.org/dc/elements/1.1/>.
+@prefix dcterms: <http://purl.org/dc/terms/>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix sh: <http://www.w3.org/ns/shacl#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+<http://convertN3ToShacl/1.5>
+	a owl:Ontology ;
+	owl:imports sh: ;
+	sh:declare xsd:PrefixDeclaration ;
+	sh:declare[
+		a sh:PrefixDeclaration ;
+		sh:namespace "http://example.org/gedcom/" ^^xsd:anyURI ;
+		sh:prefix "gd" ;
+	] ;
+	sh:declare[
+		a sh:PrefixDeclaration ;
+		sh:namespace "http://www.w3.org/2000/10/swap/log#" ^^xsd:anyURI ;
+		sh:prefix "log" ;
+	] ;
+	sh:declare[
+		a sh:PrefixDeclaration ;
+		sh:namespace "http://www.w3.org/2002/07/owl#" ^^xsd:anyURI ;
+		sh:prefix "owl" ;
+	] ;
+	sh:declare[
+		a sh:PrefixDeclaration ;
+		sh:namespace "http://www.agfa.com/w3c/euler/gedcom-facts#" ^^xsd:anyURI ;
+		sh:prefix "" ;
+	] ;
+	sh:declare[
+		a sh:PrefixDeclaration ;
+		sh:namespace "http://purl.org/dc/elements/1.1/" ^^xsd:anyURI ;
+		sh:prefix "dc" ;
+	] ;
+	sh:declare[
+		a sh:PrefixDeclaration ;
+		sh:namespace "http://purl.org/dc/terms/" ^^xsd:anyURI ;
+		sh:prefix "dcterms" ;
+	] ;
+	sh:declare[
+		a sh:PrefixDeclaration ;
+		sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#" ^^xsd:anyURI ;
+		sh:prefix "rdf" ;
+	] ;
+	sh:declare[
+		a sh:PrefixDeclaration ;
+		sh:namespace "http://www.w3.org/2000/01/rdf-schema#" ^^xsd:anyURI ;
+		sh:prefix "rdfs" ;
+	] ;
+	sh:declare[
+		a sh:PrefixDeclaration ;
+		sh:namespace "http://www.w3.org/ns/shacl#" ^^xsd:anyURI ;
+		sh:prefix "sh" ;
+	] ;
+	sh:declare[
+		a sh:PrefixDeclaration ;
+		sh:namespace "http://www.w3.org/2001/XMLSchema#" ^^xsd:anyURI ;
+		sh:prefix "xsd" ;
+	] ;
+.
+gd:N3RulesShape_5
+	a sh:NodeShape ;
+	dc:description "The node shape that holds the rule" ;
+	rdfs:isDefinedBy <http://convertN3ToShacl/1.5> ;
+	rdfs:label "A rule.";
+	sh:rule gd:SPARQLRule_5 ;
+	sh:targetClass gd:Parent ;
+.
+gd:SPARQLRule_5 
+	a sh:SPARQLRule ;
+	rdfs:isDefinedBy <http://convertN3ToShacl/1.5> ;
+	rdfs:label "A rule";
+	sh:construct""" CONSTRUCT {  $this gd:son ?child}   
+WHERE
+{	$this a gd:Parent.
+	?child a gd:Child.
+	?child	gd:parent	$this.
+	?child	gd:sex	\"Male"\ }""";
+
+sh:order 5;
+sh:prefixes <http://convertN3ToShacl/1.5> ;
+.
+
